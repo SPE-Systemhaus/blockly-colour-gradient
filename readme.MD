@@ -3,7 +3,8 @@
 Serves a JS class that can add a vertical or horizontal colour gradient to Google Blockly's blocks.
 
 ## Sample Usage
-`Blockly.Blocks['example'] = {
+```javascript 
+Blockly.Blocks['example'] = {
 	init: function() {
 		this.setHelpUrl("https://www.spe-systemhaus.de/");
 		this.setColour("#74A55B");
@@ -23,4 +24,5 @@ Serves a JS class that can add a vertical or horizontal colour gradient to Googl
             }
         );
 	}
-};`
+};
+```
