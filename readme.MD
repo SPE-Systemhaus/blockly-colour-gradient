@@ -35,13 +35,13 @@ Blockly.Blocks['example'] = {
 };
 ```
 
-# Install with Bower
+## Install with Bower
 
 ```
 bower install --save blockly-colour-gradient
 ```
 
-# Add to HTML
+## Add to HTML
 
 Add `colour-gradient.js` to your `index.html` *after* all the other blockly scripts.
 
