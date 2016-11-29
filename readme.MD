@@ -4,7 +4,11 @@ Serves a JS class that can add a vertical or horizontal colour gradient to Googl
 
 The `setVerticalGradient(block, colours, heights)` function takes a block of Blockly, an object with the keys start and stop which get HTML colours as Hex (e.g #000000) and an object with the keys start and stop which get the height in pixels.
 
+![Vertical Gradient Example](http://i.imgur.com/09keLVh.gif)
+
 The `setHorizontalGradient(block)` function takes a block and builds a colour gradient with colours of the parent and the current block.
+
+![Horizontal Gradient Example](http://i.imgur.com/N4uZhLw.gif)
 
 ## Sample Usage
 ```javascript 
