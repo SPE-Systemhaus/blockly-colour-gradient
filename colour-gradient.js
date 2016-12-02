@@ -83,7 +83,7 @@ function ColourGradient() {
                 height += input.renderHeight;
         });
 
-        height = heightHundredth * (height + (height * 0.25));
+        height = heightHundredth * height;
 
         var stops = [
             { "offset" : (height - 5) + "%", "stop-color" : colors.start },
