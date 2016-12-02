@@ -45,19 +45,15 @@ function ColourGradient() {
         
         var parentBlockSvg = parentBlock.getSvgRoot().getElementsByClassName("blocklyPath")[0];
         var gradientNode = document.getElementById(id);
-        var startColor = parentBlock.getColour();
-        var stopColor = block.getColour();
-        
+        var stops = [
+            { "offset" : "20%", "stop-color" : parentBlock.getColour() },
+            { "offset" : "80%", "stop-color" : block.getColour() }
+        ];
+
         if (!gradientNode) {    /* Creating new linearGradient Node in SVG */
-            gradientNode = createGradient([
-                { "offset" : "20%", "stop-color" : startColor },
-                { "offset" : "80%", "stop-color" : stopColor }
-            ], false); 
+            gradientNode = createGradient(stops, false); 
         } else {                /* Updating linearGradient Node */
-            updateGradient(gradientNode, [
-                { "offset" : "20%", "stop-color" : startColor },
-                { "offset" : "80%", "stop-color" : stopColor }
-            ]);
+            updateGradient(gradientNode, stops);
         }
         
         parentBlockSvg.setAttribute("fill", "url('#" + id + "')");
