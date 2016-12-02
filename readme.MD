@@ -2,7 +2,7 @@
 
 Serves a JS class that can add a vertical or horizontal colour gradient to Google Blockly's blocks (see https://github.com/google/blockly.git). Google Blockly (https://developers.google.com/blockly/) is required for this Addon.
 
-The `setVerticalGradient(block, colours, heights)` function takes a block of Blockly, an object with the keys start and stop which get HTML colours as Hex (e.g #000000) and an object with the keys start and stop which get the height in pixels.
+The `setVerticalGradient(block, colours, inputs)` function takes a block of Blockly, an object with the keys start and stop which get HTML colours as Hex (e.g #000000) and an Array with the input names that should be calculated.
 
 ![Vertical Gradient Example](http://i.imgur.com/09keLVh.gif)
 
