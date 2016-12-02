@@ -18,6 +18,7 @@ Blockly.Blocks['example'] = {
 		this.setColour("#74A55B");
 		this.gradient = new ColourGradient();	/* Creating ColourGradient Object */
 		this.appendDummyInput("bla");
+		this.appendDummyInput("blubb");
 		this.setOutput(true, "blubb");
 		this.setTooltip("See the colour gradient");
 	}, onchange : function() {
