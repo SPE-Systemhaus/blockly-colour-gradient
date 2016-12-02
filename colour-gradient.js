@@ -42,6 +42,7 @@ function ColourGradient() {
     this.setHorizontalGradient = function(block) {
         var parentBlock = block.getParent();
 		id = "gradient_" + parentBlock.id + "_" + block.id;
+        
         var parentBlockSvg = parentBlock.getSvgRoot().getElementsByClassName("blocklyPath")[0];
         var gradientNode = document.getElementById(id);
         var startColor = parentBlock.getColour();
@@ -67,31 +68,36 @@ function ColourGradient() {
 	 * 
 	 * @param {Object} block Current block that has the starting colour for the gradient.
 	 * @param {Object} colors JSON with start and stop color for the gradient.
-	 * @param {Object} heights JSON with start and stop height for the gradient.
+	 * @param {Array} inputs Array with the names of the inputs that should be calculated for the height.
      */
-    this.setVerticalGradient = function(block, colors, heights) {
+    this.setVerticalGradient = function(block, colors, inputs) {
+        if (!block && !colors && !inputs)
+            return false;
+
         id = "gradient_" + block.id;
-        
+
         var blockSvg = block.getSvgRoot().getElementsByClassName("blocklyPath")[0];
         var gradientNode = document.getElementById(id);
-        var blockHeight = block.getHeightWidth().height;
+        var height = 0;
+        var heightHundredth = 100 / block.getHeightWidth().height;
+        
+        inputs.forEach(function (entry) {
+            var input = block.getInput(entry);
+            if (input)
+                height += input.renderHeight;
+        });
 
-        var startGrad = (100 / blockHeight) * heights.start;
-        var stopGrad = (100 / blockHeight) * (heights.start + heights.stop) + 30;
-                
-		console.log(stopGrad);
-		console.log(startGrad);
-				
+        height = heightHundredth * (height + (height * 0.25));
+
+        var stops = [
+            { "offset" : (height - 5) + "%", "stop-color" : colors.start },
+            { "offset" : (height + 5) + "%", "stop-color" : colors.stop }
+        ];
+
         if (!gradientNode) {    /* Creating new linearGradient Node in SVG */
-            gradientNode = createGradient([
-                { "offset" : startGrad + "%", "stop-color" : colors.start },
-                { "offset" : stopGrad + "%", "stop-color" : colors.stop }
-            ], true); 
+            gradientNode = createGradient(stops, true); 
         } else {                /* Updating linearGradient Node */
-            updateGradient(gradientNode, [
-                { "offset" : startGrad + "%", "stop-color" : colors.start },
-                { "offset" : stopGrad + "%", "stop-color" : colors.stop }
-            ]);
+            updateGradient(gradientNode, stops);
         }
         
         blockSvg.setAttribute("fill", "url('#" + id + "')");
