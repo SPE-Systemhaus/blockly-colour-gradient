@@ -4,11 +4,11 @@ Serves a JS class that can add a vertical or horizontal colour gradient to Googl
 
 The `setVerticalGradient(block, colours, inputs)` function takes a block of Blockly, an object with the keys start and stop which get HTML colours as Hex (e.g #000000) and an Array with the input names that should be calculated.
 
-![Vertical Gradient Example](http://i.imgur.com/09keLVh.gif)
+![Vertical Gradient Example](https://github.com/SPE-Systemhaus/blockly-colour-gradient/blob/master/img/example_gradient_vertical.gif)
 
 The `setHorizontalGradient(block)` function takes a block and builds a colour gradient with colours of the parent and the current block.
 
-![Horizontal Gradient Example](http://i.imgur.com/N4uZhLw.gif)
+![Horizontal Gradient Example](https://github.com/SPE-Systemhaus/blockly-colour-gradient/blob/master/img/example_gradient_horizontal.gif)
 
 ## Sample Usage
 ```javascript 
@@ -17,8 +17,12 @@ Blockly.Blocks['example'] = {
 		this.setHelpUrl("https://www.spe-systemhaus.de/");
 		this.setColour("#74A55B");
 		this.gradient = new ColourGradient();	/* Creating ColourGradient Object */
-		this.appendDummyInput("bla");
-		this.appendDummyInput("blubb");
+        this.appendDummyInput("")
+            .appendField("Example");
+        this.appendDummyInput("bla")
+            .appendField("bla");
+		this.appendDummyInput("blubb")
+            .appendField("blubb");
 		this.setOutput(true, "blubb");
 		this.setTooltip("See the colour gradient");
 	}, onchange : function() {
@@ -27,14 +31,13 @@ Blockly.Blocks['example'] = {
             this, { 
                 "start" : "#5BA58C",
                 "stop" : this.getColour() 
-            }, {
-                "start" : this.getInput("bla").renderHeight,
-                "stop" : this.getHeightWidth().height - this.getInput("bla").renderHeight 
-            }
+            }, ["blubb"]
         );
 	}
 };
 ```
+![Gradient Example Block](https://github.com/SPE-Systemhaus/blockly-colour-gradient/blob/master/img/example_gradient_block.png)
+
 
 ## Install with Bower
 

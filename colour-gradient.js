@@ -37,17 +37,24 @@ function ColourGradient() {
      * Setting a horizontal colour gradient from the colour of this block
 	 * to the colour of the parent block.
 	 * 
-	 * @param {Object} block Current block that has the starting colour for the gradient.
-     */
-    this.setHorizontalGradient = function(block) {
+	 * @param {Blockly.Block} block Current block that has the starting colour for the gradient.
+     * @param {String} startColor Color as hex value for starting the gradient.
+	 * @param {String} endColor Color as hex value for ending the gradient.
+	 */
+    this.setHorizontalGradient = function(block, startColor, endColor) {
         var parentBlock = block.getParent();
 		id = "gradient_" + parentBlock.id + "_" + block.id;
         
+        var colors = {
+            start : (startColor) ? startColor : parentBlock.getColour(),
+            end : (endColor) ? endColor: block.getColour()
+        }; 
+
         var parentBlockSvg = parentBlock.getSvgRoot().getElementsByClassName("blocklyPath")[0];
         var gradientNode = document.getElementById(id);
         var stops = [
-            { "offset" : "20%", "stop-color" : parentBlock.getColour() },
-            { "offset" : "80%", "stop-color" : block.getColour() }
+            { "offset" : "20%", "stop-color" : colors.start },
+            { "offset" : "80%", "stop-color" : colors.end }
         ];
 
         if (!gradientNode) {    /* Creating new linearGradient Node in SVG */
