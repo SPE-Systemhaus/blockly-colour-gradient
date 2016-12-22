@@ -1,6 +1,6 @@
 /**
     @license
-    Copyright 2016 Michael Kolodziejczyk
+    Copyright 2016 SPE Systemhaus GmbH (https://spe-systemhaus.de/)
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
@@ -13,7 +13,7 @@
     @fileoverview
     This file serves a class to use colour gradients in Blockly's blocks.
     @author
-    mk@spe-systemhaus.de (Michael Kolodziejczyk)
+    Michael Kolodziejczyk <mk@spe-systemhaus.de>
     @file
     colour-gradient.js
 */
@@ -44,7 +44,7 @@ function ColourGradient() {
     this.setHorizontalGradient = function(block, startColor, endColor) {
         var parentBlock = block.getParent();
 		id = "gradient_" + parentBlock.id + "_" + block.id;
-        
+    
         var colors = {
             start : (startColor) ? startColor : parentBlock.getColour(),
             end : (endColor) ? endColor: block.getColour()
@@ -79,6 +79,9 @@ function ColourGradient() {
 
         id = "gradient_" + block.id;
 
+        /* Disabling because the ColourGradient updates the colour */
+        block.updateColour = function() {};
+
         var blockSvg = block.getSvgRoot().getElementsByClassName("blocklyPath")[0];
         var gradientNode = document.getElementById(id);
         var height = 0;
@@ -87,7 +90,8 @@ function ColourGradient() {
         inputs.forEach(function (entry) {
             var input = block.getInput(entry);
             if (input)
-                height += input.renderHeight;
+                if (input.renderHeight)
+                    height += input.renderHeight;
         });
 
         height = heightHundredth * height;
